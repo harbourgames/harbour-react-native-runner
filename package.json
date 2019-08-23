@@ -1,6 +1,6 @@
 {
   "name": "harbour-react-native-runner",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Easy web game runner in a react native shell",
   "repository": {
     "type": "git",
@@ -17,7 +17,6 @@
   },
   "main": "rn_src/harbour_web_view.js",
   "dependencies": {
-    "react-native-webview": "^6.9.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

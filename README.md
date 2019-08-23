@@ -5,6 +5,8 @@ react-native application.
 
 # Usage
 
+Make sure to include `"react-native-webview": "^6.9.0"` in your package.json.
+
 In your react-native project:
 
 ```js
