@@ -1,1 +1,1 @@
-# harbour-react-native-runner
+# harbour-web-sdk
