@@ -49,7 +49,7 @@ function _avatar(id) {
 }
 
 const PLAYER = {
-  uid: 42,
+  id: 42,
   name: "Foo",
   photo_url: _avatar(42),
 };

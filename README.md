@@ -32,7 +32,6 @@ function _onPlayer() {
 
 }
 
-
 ```
 
 In your facebook instant game:

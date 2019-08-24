@@ -23,7 +23,7 @@ export default {
   player,
 };
 
-let g_uid = 0;
+let g_id = 0;
 let g_name = "";
 let g_email = "";
 let g_photoUrl = null;
@@ -37,13 +37,13 @@ export function init(done) {
 }
 
 function _onPlayer(player) {
-  g_uid = player.uid;
+  g_id = player.id;
   g_name = player.name;
   g_photoUrl = player.photo_url;
 }
 
 function getID() {
-  return g_uid;
+  return g_id;
 }
 function getName() {
   return g_name;
