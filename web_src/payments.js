@@ -1,12 +1,9 @@
 
-import { loadScript } from './tools/util.js';
-
 export default {
   init,
-}
-
+  payments,
+};
 export const payments = {
-  setConfig,
   onReady,
   getCatalogAsync,
   purchaseAsync,
@@ -17,26 +14,15 @@ export const payments = {
 function init(done) {
   done && done();
 }
-
-function setConfig(params) {
-}
-
 function onReady(callback) {
   callback && callback();
 }
-
 function getCatalogAsync() {
   return Promise.resolve([]);
 }
-
-function purchaseAsync(params) {
-  const { productID, description, amountUsd } = params;
-
-  return new Promise((resolve,reject) => {
-    reject({ code: 'UNSUPPORTED_OPERATION' });
-  });
+function purchaseAsync() {
+  return Promise.reject({ code: 'UNSUPPORTED_OPERATION' });
 }
-
 function getPurchasesAsync() {
   return Promise.resolve([]);
 }

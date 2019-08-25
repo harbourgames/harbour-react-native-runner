@@ -14,7 +14,7 @@ export function initializeAsync(params) {
       Player.init,
       Leaderboard.init,
       Payments.init,
-    ],err => {
+    ],() => {
       resolve();
     })
   });

@@ -1,6 +1,6 @@
 {
   "name": "harbour-react-native-runner",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Easy web game runner in a react native shell",
   "repository": {
     "type": "git",
@@ -13,16 +13,18 @@
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
-    "lint": "eslint src"
+    "lint": "eslint web_src"
   },
   "main": "rn_src/harbour_web_view.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@react-native-community/eslint-config": "^0.0.5",
     "babel-core": "^6.26.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-env": "^1.6.1",
+    "eslint": "^6.0.1",
+    "metro-react-native-babel-preset": "^0.55.0",
     "rollup": "^0.58.2",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.0",

@@ -55,7 +55,7 @@ export function loadScript(url,done) {
 }
 
 let g_callbackIndex = 1;
-let g_callbackMap = {};
+const g_callbackMap = {};
 
 export function sendHost(event,extra,cb) {
   if (extra === undefined) {

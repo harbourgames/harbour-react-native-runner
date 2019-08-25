@@ -1,5 +1,6 @@
 
 import { initializeAsync, setLoadingProgress, startGameAsync } from './startup.js';
+import { getInterstitialAdAsync, getRewardedVideoAsync } from './ads.js';
 import { getLeaderboardAsync } from './leaderboard.js';
 import { payments } from "./payments";
 import { player } from "./player"
@@ -93,10 +94,4 @@ function logEvent(eventName,valueToSum,parameters) {
 }
 function onPause(callback) {
   window.onblur = callback;
-}
-function getInterstitialAdAsync() {
-  return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
-}
-function getRewardedVideoAsync() {
-  return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
 }

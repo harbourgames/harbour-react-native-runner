@@ -16,6 +16,9 @@ export default class HarbourWebView extends React.PureComponent {
     onLeaderboardPlayerEntry: noop,
     onLeaderboardEntries: noop,
     onMessage: noop,
+    onLog: noop,
+    onAdLoad: noop,
+    onAdShow: noop,
   };
 
   _webRef = React.createRef();
@@ -25,7 +28,9 @@ export default class HarbourWebView extends React.PureComponent {
       const object = jsonParse(data);
       if (object && object.event) {
         const { event, extra, callback_index } = object;
-        if (event === 'player') {
+        if (event === 'log') {
+          this.props.onLog(event,extra);
+        } else if (event === 'player') {
           this.props.onPlayer(event,extra,callback_index);
         } else if (event === 'leaderboard_list') {
           this.props.onLeaderboardList(event,extra,callback_index);
@@ -37,6 +42,10 @@ export default class HarbourWebView extends React.PureComponent {
           this.props.onLeaderboardPlayerEntry(event,extra,callback_index);
         } else if (event === 'leaderboard_entries') {
           this.props.onLeaderboardEntries(event,extra,callback_index);
+        } else if (event === 'ad_load') {
+          this.props.onAdLoad(event,extra,callback_index);
+        } else if (event === 'ad_show') {
+          this.props.onAdShow(event,extra,callback_index);
         } else {
           if (this.props.onMessage) {
             this.props.onMessage(event,extra,callback_index);

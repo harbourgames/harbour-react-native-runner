@@ -1,12 +1,10 @@
 
-import UI from "./ui";
-import { onMessage, sendHost, log } from './tools/util.js';
+import { onMessage, sendHost, } from './tools/util.js';
 
 export const player = {
   getID,
   getName,
   getPhoto,
-  getEmail,
   getDataAsync,
   setDataAsync,
   getStatsAsync,
@@ -25,9 +23,7 @@ export default {
 
 let g_id = 0;
 let g_name = "";
-let g_email = "";
 let g_photoUrl = null;
-let g_signedRequest = "";
 
 export function init(done) {
   onMessage("player",_onPlayer);
@@ -50,9 +46,6 @@ function getName() {
 }
 function getPhoto() {
   return g_photoUrl;
-}
-function getEmail() {
-  return g_email;
 }
 function getDataAsync() {
   return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION" });
@@ -77,7 +70,7 @@ function getConnectedPlayersAsync() {
 }
 function getSignedPlayerInfoAsync() {
   return Promise.resolve({
-    getSignature: () => g_signedRequest,
+    getSignature: () => "",
     getPlayerID: getID,
   });
 }
@@ -86,7 +79,4 @@ function canSubscribeBotAsync() {
 }
 function subscribeBotAsync() {
   return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION" });
-}
-function _getUrl(obj) {
-  return obj && obj.data && obj.data.url;
 }

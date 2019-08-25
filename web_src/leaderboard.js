@@ -1,5 +1,5 @@
 
-import { onMessage, sendHost, log } from './tools/util.js';
+import { onMessage, sendHost, } from './tools/util.js';
 import Player from './player';
 
 export default {
@@ -7,11 +7,9 @@ export default {
   getLeaderboardAsync,
 };
 
-let g_leaderboardMap = {};
-let g_initDone = null;
+const g_leaderboardMap = {};
 
 export function init(done) {
-  g_initDone = done;
   onMessage("leaderboard_list",_onList);
 
   sendHost("leaderboard_list",null,() => {
@@ -77,7 +75,7 @@ class Leaderboard {
         if (err) {
           reject({ code: err });
         } else {
-          const { timestamp, rank, extraData } = result;
+          const { rank, score, timestamp, extraData } = result;
           const player = Player.player;
           const entry = new LeaderboardEntry(score,timestamp,rank,extraData,player);
           resolve(entry);
@@ -92,17 +90,18 @@ class Leaderboard {
         if (err) {
           reject({ code: err });
         } else {
-          entry_list = results.map(result => {
+          const entry_list = results.map(result => {
             const { score, timestamp, rank, extraData, id, name, photo } = result;
             const player = new LeaderboardPlayer(id,name,photo);
             const entry = new LeaderboardEntry(score,timestamp,rank,extraData,player);
+            return entry;
           });
          resolve(entry_list);
         }
       });
     });
   }
-  getConnectedPlayerEntriesAsync(count,offset) {
+  getConnectedPlayerEntriesAsync() {
     return Promise.resolve([]);
   }
 }
