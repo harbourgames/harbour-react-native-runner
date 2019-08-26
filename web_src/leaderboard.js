@@ -44,11 +44,11 @@ class Leaderboard {
   getEntryCountAsync() {
     return new Promise((resolve,reject) => {
       const extra = { name: this.name };
-      sendHost("leaderboard_entry_count",extra,(err,result) => {
+      sendHost("leaderboard_entry_count",extra,(err,count) => {
         if (err) {
           reject({ code: err });
         } else {
-          resolve(result.count);
+          resolve(count);
         }
       });
     });
@@ -74,6 +74,8 @@ class Leaderboard {
       sendHost("leaderboard_player_entry",extra,(err,result) => {
         if (err) {
           reject({ code: err });
+        } else if (!result) {
+          resolve(null);
         } else {
           const { rank, score, timestamp, extraData } = result;
           const player = Player.player;
