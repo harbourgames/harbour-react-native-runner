@@ -83,18 +83,23 @@ export function onMessage(event,handler) {
   }
 }
 export function emitMessage(event,err,result,callback_index) {
-  const list = g_eventMap[event];
-  if (list && !err) {
-    list.forEach(cb => cb(result));
-  }
-
-  if (callback_index) {
-    const cb = g_callbackMap[callback_index];
-    if (cb) {
-      delete g_callbackMap[callback_index];
-      cb(err,result);
+  try {
+    const list = g_eventMap[event];
+    if (list && !err) {
+      list.forEach(cb => cb(result));
     }
+
+    if (callback_index) {
+      const cb = g_callbackMap[callback_index];
+      if (cb) {
+        delete g_callbackMap[callback_index];
+        cb(err,result);
+      }
+    }
+  } catch(e) {
+    log("emit_throw",e.stack);
   }
+  return true;
 }
 
 export function log(log_event_name,extra) {
