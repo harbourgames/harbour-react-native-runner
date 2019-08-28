@@ -57,6 +57,10 @@ export function loadScript(url,done) {
 let g_callbackIndex = 1;
 const g_callbackMap = {};
 
+export function hasReactNative() {
+  return window.ReactNativeWebView && window.ReactNativeWebView.postMessage;
+}
+
 export function sendHost(event,extra,cb) {
   if (extra === undefined) {
     extra = null;
@@ -67,7 +71,7 @@ export function sendHost(event,extra,cb) {
     g_callbackMap[callback_index] = cb;
   }
   const json = JSON.stringify({ event, extra, callback_index });
-  if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+  if (hasReactNative()) {
     window.ReactNativeWebView.postMessage(json);
   } else {
     console.log(json);

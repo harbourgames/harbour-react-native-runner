@@ -1,5 +1,5 @@
 
-import { asyncSeries, } from './tools/util.js';
+import { asyncSeries, hasReactNative } from './tools/util.js';
 import UI from './ui';
 
 import Leaderboard from './leaderboard';
@@ -7,23 +7,27 @@ import Player from './player';
 import Payments from './payments';
 
 export function initializeAsync(params) {
-  return new Promise(resolve => {
-    UI.addLoader(params);
+  const force_load = params && params.force_load;
 
-    asyncSeries([
-      Player.init,
-      Leaderboard.init,
-      Payments.init,
-    ],() => {
-      resolve();
-    })
+  return new Promise((resolve,reject) => {
+    if (hasReactNative() && !force_load) {
+      UI.addLoader(params);
+
+
+      asyncSeries([
+        Player.init,
+        Leaderboard.init,
+        Payments.init,
+      ],() => {
+        resolve();
+      })
+    } else {
+      reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
+    }
   });
 }
 export function setLoadingProgress(progress) {
-  return new Promise(resolve => {
-    UI.setLoaderText(`${progress.toFixed()}% Loaded`);
-    resolve();
-  });
+  UI.setLoaderText(`${progress.toFixed()}% Loaded`);
 }
 export function startGameAsync() {
   return new Promise(resolve => {

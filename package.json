@@ -1,6 +1,6 @@
 {
   "name": "harbour-react-native-runner",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Easy web game runner in a react native shell",
   "repository": {
     "type": "git",
