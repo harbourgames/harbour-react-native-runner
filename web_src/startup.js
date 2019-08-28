@@ -10,7 +10,9 @@ export function initializeAsync(params) {
   const force_load = params && params.force_load;
 
   return new Promise((resolve,reject) => {
-    if (hasReactNative() && !force_load) {
+    if (!hasReactNative() && !force_load) {
+      reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
+    } else {
       UI.addLoader(params);
 
 
@@ -21,8 +23,6 @@ export function initializeAsync(params) {
       ],() => {
         resolve();
       })
-    } else {
-      reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
     }
   });
 }
