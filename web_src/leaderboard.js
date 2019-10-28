@@ -1,5 +1,5 @@
 
-import { onMessage, sendHost, } from './tools/util.js';
+import { sendHost } from './tools/util.js';
 import Player from './player';
 
 export default {
@@ -10,25 +10,15 @@ export default {
 const g_leaderboardMap = {};
 
 export function init(done) {
-  onMessage("leaderboard_list",_onList);
-
-  sendHost("leaderboard_list",null,() => {
-    done();
-  });
+  done();
 }
 export function getLeaderboardAsync(name) {
-  const leaderboard = g_leaderboardMap[name];
-  if (leaderboard) {
-    return Promise.resolve(leaderboard);
-  } else {
-    return Promise.reject({ code: "LEADERBOARD_NOT_FOUND", });
+  let leaderboard = g_leaderboardMap[name];
+  if (!leaderboard) {
+    leaderboard = new Leaderboard(name);
+    g_leaderboardMap[name] = leaderboard;
   }
-}
-
-function _onList(list) {
-  list.forEach(name => {
-    g_leaderboardMap[name] = new Leaderboard(name);
-  });
+  return Promise.resolve(leaderboard);
 }
 
 class Leaderboard {

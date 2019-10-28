@@ -8,7 +8,6 @@ function noop() {};
 export default class HarbourWebView extends React.PureComponent {
   static propTypes = {
     onPlayer: PropTypes.func.isRequired,
-    onLeaderboardList: PropTypes.func.isRequired,
   };
   static defaultProps = {
     onLeaderboardEntryCount: noop,
@@ -32,8 +31,6 @@ export default class HarbourWebView extends React.PureComponent {
           this.props.onLog(event,extra);
         } else if (event === 'player') {
           this.props.onPlayer(event,extra,callback_index);
-        } else if (event === 'leaderboard_list') {
-          this.props.onLeaderboardList(event,extra,callback_index);
         } else if (event === 'leaderboard_entry_count') {
           this.props.onLeaderboardEntryCount(event,extra,callback_index);
         } else if (event === 'leaderboard_set_score') {
@@ -73,8 +70,9 @@ export default class HarbourWebView extends React.PureComponent {
   render() {
     const {
       onPlayer,
-      onLeaderboardList, onLeaderboardEntryCount,
-      onLeaderboardSetScore, onLeaderboardPlayerEntry,
+      onLeaderboardEntryCount,
+      onLeaderboardSetScore,
+      onLeaderboardPlayerEntry,
       onLeaderboardEntries,
       onMessage,
       ...other
