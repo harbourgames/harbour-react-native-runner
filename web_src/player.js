@@ -23,7 +23,7 @@ export default {
 
 let g_id = 0;
 let g_name = "";
-let g_photoUrl = null;
+let g_photo = null;
 
 export function init(done) {
   onMessage("player",_onPlayer);
@@ -35,7 +35,7 @@ export function init(done) {
 function _onPlayer(player) {
   g_id = player.id;
   g_name = player.name;
-  g_photoUrl = player.photo_url;
+  g_photo = player.photo;
 }
 
 function getID() {
@@ -45,7 +45,7 @@ function getName() {
   return g_name;
 }
 function getPhoto() {
-  return g_photoUrl;
+  return g_photo;
 }
 function getDataAsync() {
   return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION" });

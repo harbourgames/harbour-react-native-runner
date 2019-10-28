@@ -100,8 +100,8 @@ export function emitMessage(event,err,result,callback_index) {
         cb(err,result);
       }
     }
-  } catch(e) {
-    log("emit_throw",e.stack);
+  } catch (error) {
+    log("emit_throw",error.stack);
   }
   return true;
 }

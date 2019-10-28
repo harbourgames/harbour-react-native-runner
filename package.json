@@ -1,6 +1,6 @@
 {
   "name": "harbour-react-native-runner",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Easy web game runner in a react native shell",
   "repository": {
     "type": "git",
@@ -16,6 +16,10 @@
     "lint": "eslint web_src"
   },
   "main": "rn_src/harbour_web_view.js",
+  "files": [
+    "rn_src/*",
+    "dist/*"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@react-native-community/eslint-config": "^0.0.5",

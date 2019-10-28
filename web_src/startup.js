@@ -15,7 +15,6 @@ export function initializeAsync(params) {
     } else {
       UI.addLoader(params);
 
-
       asyncSeries([
         Player.init,
         Leaderboard.init,
