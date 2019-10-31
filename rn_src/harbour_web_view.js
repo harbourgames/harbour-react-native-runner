@@ -66,6 +66,24 @@ export default class HarbourWebView extends React.PureComponent {
       this._webRef.current.injectJavaScript(run);
     }
   }
+  reload() {
+    if (this._webRef.current) {
+      this._webRef.current.reload();
+    }
+  }
+  stopLoading() {
+    if (this._webRef.current) {
+      this._webRef.current.stopLoading();
+    }
+  }
+  injectJavaScript(str) {
+    if (this._webRef.current) {
+      this._webRef.current.injectJavaScript(str);
+    }
+  }
+  static extraNativeComponentConfig(args) {
+    WebView.extraNativeComponentConfig(args)
+  }
 
   render() {
     const {
