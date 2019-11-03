@@ -46,7 +46,7 @@ export default class HarbourWebView extends React.PureComponent {
       if (object && object.event) {
         const { event, extra, callback_index } = object;
         if (event === 'log') {
-          this.props.onLog(event,extra);
+          this.props.onLog(extra);
         } else if (event === 'player') {
           this.props.onPlayer(event,extra,callback_index);
         } else if (event === 'leaderboard_entry_count') {
@@ -66,11 +66,11 @@ export default class HarbourWebView extends React.PureComponent {
         } else if (event === 'logout') {
           this.props.onLogout(event,extra,callback_index);
         } else if (event === 'init') {
-          this.props.onGameInit(event,extra,callback_index);
+          this.props.onGameInit(extra);
         } else if (event === 'loading_progress') {
-          this.props.onGameLoadingProgress(event,extra,callback_index);
+          this.props.onGameLoadingProgress(extra);
         } else if (event === 'start_game') {
-          this.props.onGameStart(event,extra,callback_index);
+          this.props.onGameStart(extra);
         } else {
           if (this.props.onMessage) {
             this.props.onMessage(event,extra,callback_index);
