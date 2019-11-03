@@ -32,8 +32,8 @@ export function setLoadingProgress(progress) {
 }
 export function startGameAsync() {
   return new Promise(resolve => {
-    sendHost('start_game');
     UI.removeLoader();
+    sendHost('start_game');
     resolve();
   });
 }
