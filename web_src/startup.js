@@ -1,6 +1,5 @@
 
 import { asyncSeries, hasReactNative, sendHost } from './tools/util.js';
-import UI from './ui';
 
 import Leaderboard from './leaderboard';
 import Player from './player';
@@ -14,8 +13,6 @@ export function initializeAsync(params) {
     if (!hasReactNative() && !force_load) {
       reject({ code: "CLIENT_UNSUPPORTED_OPERATION", });
     } else {
-      UI.addLoader(params);
-
       asyncSeries([
         Player.init,
         Leaderboard.init,
@@ -27,12 +24,10 @@ export function initializeAsync(params) {
   });
 }
 export function setLoadingProgress(progress) {
-  UI.setLoaderText(`${progress.toFixed()}% Loaded`);
   sendHost('loading_progress',progress);
 }
 export function startGameAsync() {
   return new Promise(resolve => {
-    UI.removeLoader();
     sendHost('start_game');
     resolve();
   });
