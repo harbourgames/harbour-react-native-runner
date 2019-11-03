@@ -18,9 +18,9 @@ export default class HarbourWebView extends React.PureComponent {
     onAdShow: PropTypes.func,
     onLogin: PropTypes.func,
     onLogout: PropTypes.func,
-    onInit: PropTypes.func,
-    onLoadingProgress: PropTypes.func,
-    onStartGame: PropTypes.func,
+    onGameInit: PropTypes.func,
+    onGameLoadingProgress: PropTypes.func,
+    onGameStart: PropTypes.func,
   };
   static defaultProps = {
     onLeaderboardEntryCount: noop,
@@ -33,9 +33,9 @@ export default class HarbourWebView extends React.PureComponent {
     onAdShow: noop,
     onLogin: noop,
     onLogout: noop,
-    onInit: noop,
-    onLoadingProgress: noop,
-    onStartGame: noop,
+    onGameInit: noop,
+    onGameLoadingProgress: noop,
+    onGameStart: noop,
   };
 
   _webRef = React.createRef();
@@ -66,11 +66,11 @@ export default class HarbourWebView extends React.PureComponent {
         } else if (event === 'logout') {
           this.props.onLogout(event,extra,callback_index);
         } else if (event === 'init') {
-          this.props.onInit(event,extra,callback_index);
+          this.props.onGameInit(event,extra,callback_index);
         } else if (event === 'loading_progress') {
-          this.props.onLoadingProgress(event,extra,callback_index);
+          this.props.onGameLoadingProgress(event,extra,callback_index);
         } else if (event === 'start_game') {
-          this.props.onStartGame(event,extra,callback_index);
+          this.props.onGameStart(event,extra,callback_index);
         } else {
           if (this.props.onMessage) {
             this.props.onMessage(event,extra,callback_index);
