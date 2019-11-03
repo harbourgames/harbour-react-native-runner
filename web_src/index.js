@@ -5,10 +5,9 @@ import { getLeaderboardAsync } from './leaderboard.js';
 import { payments } from "./payments";
 import { player } from "./player"
 import { context } from "./context";
-import { log, emitMessage } from './tools/util';
+import { log, emitMessage, sendHost } from './tools/util';
 
 const HarbourSDK = {
-  emitMessage,
   player,
   context,
   payments,
@@ -31,6 +30,9 @@ const HarbourSDK = {
   getInterstitialAdAsync,
   getRewardedVideoAsync,
   getLeaderboardAsync,
+
+  emitMessage,
+  sendHost,
 };
 
 window.HarbourSDK = HarbourSDK;

@@ -1,5 +1,5 @@
 
-import { asyncSeries, hasReactNative } from './tools/util.js';
+import { asyncSeries, hasReactNative, sendHost } from './tools/util.js';
 import UI from './ui';
 
 import Leaderboard from './leaderboard';
@@ -8,6 +8,7 @@ import Payments from './payments';
 
 export function initializeAsync(params) {
   const force_load = params && params.force_load;
+  sendHost('init',params);
 
   return new Promise((resolve,reject) => {
     if (!hasReactNative() && !force_load) {
@@ -27,9 +28,11 @@ export function initializeAsync(params) {
 }
 export function setLoadingProgress(progress) {
   UI.setLoaderText(`${progress.toFixed()}% Loaded`);
+  sendHost('loading_progress',progress);
 }
 export function startGameAsync() {
   return new Promise(resolve => {
+    sendHost('start_game');
     UI.removeLoader();
     resolve();
   });

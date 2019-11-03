@@ -8,6 +8,19 @@ function noop() {};
 export default class HarbourWebView extends React.PureComponent {
   static propTypes = {
     onPlayer: PropTypes.func.isRequired,
+    onLeaderboardEntryCount: PropTypes.func,
+    onLeaderboardSetScore: PropTypes.func,
+    onLeaderboardPlayerEntry: PropTypes.func,
+    onLeaderboardEntries: PropTypes.func,
+    onMessage: PropTypes.func,
+    onLog: PropTypes.func,
+    onAdLoad: PropTypes.func,
+    onAdShow: PropTypes.func,
+    onLogin: PropTypes.func,
+    onLogout: PropTypes.func,
+    onInit: PropTypes.func,
+    onLoadingProgress: PropTypes.func,
+    onStartGame: PropTypes.func,
   };
   static defaultProps = {
     onLeaderboardEntryCount: noop,
@@ -18,6 +31,11 @@ export default class HarbourWebView extends React.PureComponent {
     onLog: noop,
     onAdLoad: noop,
     onAdShow: noop,
+    onLogin: noop,
+    onLogout: noop,
+    onInit: noop,
+    onLoadingProgress: noop,
+    onStartGame: noop,
   };
 
   _webRef = React.createRef();
@@ -43,6 +61,16 @@ export default class HarbourWebView extends React.PureComponent {
           this.props.onAdLoad(event,extra,callback_index);
         } else if (event === 'ad_show') {
           this.props.onAdShow(event,extra,callback_index);
+        } else if (event === 'login') {
+          this.props.onLogin(event,extra,callback_index);
+        } else if (event === 'logout') {
+          this.props.onLogout(event,extra,callback_index);
+        } else if (event === 'init') {
+          this.props.onInit(event,extra,callback_index);
+        } else if (event === 'loading_progress') {
+          this.props.onLoadingProgress(event,extra,callback_index);
+        } else if (event === 'start_game') {
+          this.props.onStartGame(event,extra,callback_index);
         } else {
           if (this.props.onMessage) {
             this.props.onMessage(event,extra,callback_index);

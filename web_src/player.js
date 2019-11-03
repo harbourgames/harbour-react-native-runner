@@ -15,6 +15,10 @@ export const player = {
   getSignedPlayerInfoAsync,
   canSubscribeBotAsync,
   subscribeBotAsync,
+
+  getExtraData,
+  loginAsync,
+  logoutAsync,
 };
 export default {
   init,
@@ -24,6 +28,7 @@ export default {
 let g_id = 0;
 let g_name = "";
 let g_photo = null;
+let g_extraData = null;
 
 export function init(done) {
   onMessage("player",_onPlayer);
@@ -33,9 +38,17 @@ export function init(done) {
 }
 
 function _onPlayer(player) {
-  g_id = player.id;
-  g_name = player.name;
-  g_photo = player.photo;
+  if (player) {
+    g_id = player.id;
+    g_name = player.name;
+    g_photo = player.photo;
+    g_extraData = player.extraData;
+  } else {
+    g_id = 0;
+    g_name = "";
+    g_photo = null;
+    g_extraData = null;
+  }
 }
 
 function getID() {
@@ -46,6 +59,9 @@ function getName() {
 }
 function getPhoto() {
   return g_photo;
+}
+function getExtraData() {
+  return g_extraData;
 }
 function getDataAsync() {
   return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION" });
@@ -70,8 +86,10 @@ function getConnectedPlayersAsync() {
 }
 function getSignedPlayerInfoAsync() {
   return Promise.resolve({
-    getSignature: () => "",
+    getSignature: () => g_extraData.signature,
     getPlayerID: getID,
+    getAppID: () => g_extraData.facebook_app_id,
+    getAccessToken: () => g_extraData.access_token,
   });
 }
 function canSubscribeBotAsync() {
@@ -79,4 +97,33 @@ function canSubscribeBotAsync() {
 }
 function subscribeBotAsync() {
   return Promise.reject({ code: "CLIENT_UNSUPPORTED_OPERATION" });
+}
+
+function loginAsync(opts) {
+  return new Promise((resolve,reject) => {
+    sendHost("login",opts || null,(err,player) => {
+      if (err) {
+        reject({ code: err });
+      } else {
+        _onPlayer(player);
+        resolve(player);
+      }
+    });
+  });
+}
+
+function logoutAsync(opts) {
+  g_id = 0;
+  g_name = "";
+  g_photo = null;
+  g_extraData = null;
+  return new Promise((resolve,reject) => {
+    sendHost("logout",opts || null,(err,result) => {
+      if (err) {
+        reject({ code: err });
+      } else {
+        resolve(result);
+      }
+    });
+  });
 }
