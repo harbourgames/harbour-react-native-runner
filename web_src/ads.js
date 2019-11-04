@@ -22,11 +22,11 @@ class AdInstance {
   isAvailableAsync() {
     return new Promise((resolve,reject) => {
       const opts = { placement_id: this.placement_id, type: this.type };
-      sendHost("ad_available",opts,err => {
+      sendHost("ad_available",opts,(err,is_available) => {
         if (err) {
           reject({ code: err });
         } else {
-          resolve();
+          resolve(is_available);
         }
       });
     });
