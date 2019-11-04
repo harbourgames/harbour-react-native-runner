@@ -19,10 +19,10 @@ class AdInstance {
   getPlacementID() {
     return this.placement_id;
   }
-  loadAsync() {
+  isAvailableAsync() {
     return new Promise((resolve,reject) => {
-      const extra = { placement_id: this.placement_id, type: this.type };
-      sendHost("ad_load",extra,err => {
+      const opts = { placement_id: this.placement_id, type: this.type };
+      sendHost("ad_available",opts,err => {
         if (err) {
           reject({ code: err });
         } else {
@@ -31,10 +31,22 @@ class AdInstance {
       });
     });
   }
-  showAsync() {
+  loadAsync() {
     return new Promise((resolve,reject) => {
-      const extra = { placement_id: this.placement_id, type: this.type };
-      sendHost("ad_show",extra,err => {
+      const opts = { placement_id: this.placement_id, type: this.type };
+      sendHost("ad_load",opts,err => {
+        if (err) {
+          reject({ code: err });
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+  showAsync(extra) {
+    return new Promise((resolve,reject) => {
+      const opts = { placement_id: this.placement_id, type: this.type, extra };
+      sendHost("ad_show",opts,err => {
         if (err) {
           reject({ code: err });
         } else {

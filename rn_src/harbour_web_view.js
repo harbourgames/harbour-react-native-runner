@@ -16,6 +16,7 @@ export default class HarbourWebView extends React.PureComponent {
     onLog: PropTypes.func,
     onAdLoad: PropTypes.func,
     onAdShow: PropTypes.func,
+    onAdAvailable: PropTypes.func,
     onLogin: PropTypes.func,
     onLogout: PropTypes.func,
     onGameInit: PropTypes.func,
@@ -31,6 +32,7 @@ export default class HarbourWebView extends React.PureComponent {
     onLog: noop,
     onAdLoad: noop,
     onAdShow: noop,
+    onAdAvailable: noop,
     onLogin: noop,
     onLogout: noop,
     onGameInit: noop,
@@ -61,6 +63,8 @@ export default class HarbourWebView extends React.PureComponent {
           this.props.onAdLoad(event,extra,callback_index);
         } else if (event === 'ad_show') {
           this.props.onAdShow(event,extra,callback_index);
+        } else if (event === 'ad_available') {
+          this.props.onAdAvailable(event,extra,callback_index);
         } else if (event === 'login') {
           this.props.onLogin(event,extra,callback_index);
         } else if (event === 'logout') {
