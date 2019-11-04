@@ -5,7 +5,7 @@ import { getLeaderboardAsync } from './leaderboard.js';
 import { payments } from "./payments";
 import { player } from "./player"
 import { context } from "./context";
-import { log, emitMessage, sendHost } from './tools/util';
+import { log, onMessage, emitMessage, sendHost } from './tools/util';
 
 const HarbourSDK = {
   player,
@@ -32,6 +32,8 @@ const HarbourSDK = {
   getLeaderboardAsync,
 
   emitMessage,
+
+  onMessage,
   sendHost,
   getHarbourPlatform,
 };
