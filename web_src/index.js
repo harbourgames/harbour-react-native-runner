@@ -33,6 +33,7 @@ const HarbourSDK = {
 
   emitMessage,
   sendHost,
+  getHarbourPlatform,
 };
 
 window.HarbourSDK = HarbourSDK;
@@ -68,6 +69,9 @@ function getPlatform() {
 }
 function getSDKVersion() {
   return "6.2";
+}
+function getHarbourPlatform() {
+  return "HARBOUR_RUNNER";
 }
 function getSupportedAPIs() {
   const api_list = [];
